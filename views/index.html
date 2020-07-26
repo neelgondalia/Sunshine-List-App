@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Canada - Top Public-Sector Earners Analysis Tool</title>
+		{{> head}}
+	</head>
+	<body>
+		<nav class="navbar navbar-light" style="background-color: rgb(0, 0, 0);">
+			<a class="navbar-brand" href="/">
+				<img src="/img/logo.png" width="30" height="30" class="d-inline-block align-top"  alt="">
+				<p style="display:inline; color:white;">SunSystems</p>
+			</a>
+			<section id="header-links">
+				<a href="/about-us" class="btn btn-outline-warning">About Us</a>
+			</section>
+		</nav>
+		<div id="main-app-container" class="container">
+			<div class="row full-height">
+				<div id="main-filter-pane" class="col-sm-2 light-grey-bg">
+					
+					<div id="filter-pane-main-title" class="block">
+						<div class="filter-main-title-block">Public Sector Earners</div>
+						<div class="filter-main-title-block">Analysis Tool</div>
+					</div>
+
+					<div id="data-filters" class="block">
+						<div class="filter-title">Data Filters</div>
+
+						<div class="filter-row">
+							<label class="filter-label" for="year-value">Year</label>
+							<div class="range-slider">
+								<div id="filter-rs-year-val"></div>
+								<div id="filter-rs-year"></div>
+							</div>
+						</div>
+						
+						<div class="filter-row">
+							<label class="filter-label" for="year-value">Salary</label>
+							<div class="range-slider">
+								<div id="filter-rs-salary-val"></div>
+								<div id="filter-rs-salary"></div>
+							</div>
+						</div>
+
+						<div class="filter-row">
+							<label class="filter-label" for="year-value">Taxable Benefits</label>
+							<div class="range-slider">
+								<div id="filter-rs-taxable-benefits-val"></div>
+								<div id="filter-rs-taxable-benefits"></div>
+							</div>
+						</div>
+					</div>
+					
+					<div id="data-filters" class="block">
+						<div class="filter-title">Province Filters</div>
+						
+						<div class="filter-row-small">
+							<label class="filter-label">Ontario</label>
+							<input id="checkbox-province-ON" type="checkbox" checked>
+						</div>
+
+						<div class="filter-row-small">
+							<label class="filter-label">Alberta</label>
+							<input id="checkbox-province-AB" type="checkbox" checked>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-10">
+					<div id="main-data-table" class="row">
+						<table id="main-sunshine-list-table" class="display" style="width:100%;visibility:hidden">
+							<tfoot>
+								<tr>
+									<th>Province</th>
+									<th>Year</th>
+									<th>Sector</th>
+									<th>Employer</th>
+									<th>Position Title</th>
+									<th>Position Class</th>
+									<th>First Name</th>
+									<th>Last Name</th>
+									<th>Salary</th>
+									<th>Taxable Benefits</th>
+									<th>Severance</th>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+
+					<div class="py-3" style="visibility:hidden"><hr></div><!--spacer-->
+
+					<div id="statistical-analysis-wrapper" class="row">
+						<table id="statistical-analysis-table">
+							<!--auto generated via js-->
+						</table>
+					</div>
+
+					<div class="py-3" style="visibility:hidden"><hr></div><!--spacer-->
+
+					<div id="main-data-charts" class="row">
+						<table style="width:100%">
+							<tr>
+								<td style="width:50%">
+									<div class="canvas-div">
+										<canvas id="canvas-01"></canvas>
+										<select id="chart-selection-dropdown-menu-01" class="form-control" style="visibility:hidden">
+											<option selected="selected" id="chart-opt-01">Jobs by sector Pie Chart</option>
+											<option id="chart-opt-02">Salary by sector Pie Chart</option>
+										</select>
+										<button class="btn btn-sm btn-warning" id="chart-save-01" style="visibility:hidden">Save as Image</button>
+									</div>
+								</td>
+								
+								<td style="width:50%">
+									<div class="canvas-div">
+										<canvas id="canvas-02"></canvas>
+										<select id="chart-selection-dropdown-menu-02" class="form-control" style="visibility:hidden">
+											<option selected="selected" id="chart-opt-03">Average salary by sector Bar Chart</option>
+										</select>
+										<button class="btn btn-sm btn-warning" id="chart-save-02" style="visibility:hidden">Save as Image</button>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<script src="/js/jquery-3.3.1.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+		<!--Load datatables and its plugins-->
+		<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+		<script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+		<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+		<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+		<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+		<script src="/js/notify.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
+
+		<script src="/js/helpers.js"></script>
+		<script src="/js/chart-generate.js"></script>
+		<script src="/js/app.js"></script>
+	</body>
+</html>

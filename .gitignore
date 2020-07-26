@@ -1,0 +1,4 @@
+node_modules
+config.js
+scripts/database-export.sql
+test.txt
